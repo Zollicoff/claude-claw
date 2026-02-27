@@ -1,0 +1,7 @@
+{
+  "claw-bridge": {
+    "type": "command",
+    "command": "node",
+    "args": ["./mcp-server/dist/index.js"]
+  }
+}

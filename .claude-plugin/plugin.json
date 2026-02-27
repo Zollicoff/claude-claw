@@ -1,0 +1,8 @@
+{
+  "name": "claude-claw",
+  "description": "OpenClaw-inspired messaging, scheduling, and canvas capabilities as a Claude Code plugin. Gateway daemon for Discord/Telegram/Slack integration, cron scheduling, and agent-driven HTML canvas.",
+  "author": {
+    "name": "Zollicoff",
+    "email": "008339494@coyote.csusb.edu"
+  }
+}

@@ -40,10 +40,10 @@ Monolithic plugin bundling all components. The Gateway daemon is a persistent ba
 │                                        │ IPC        │
 │  ┌─────────────────────────────────────┴──────────┐ │
 │  │            Gateway Daemon (Node.js)            │ │
-│  │                 (port 18789)                    │ │
+│  │                 (port 19789)                    │ │
 │  │  ┌─────────┐ ┌──────────┐ ┌─────────────────┐ │ │
 │  │  │Adapters │ │Scheduler │ │  Canvas Server  │ │ │
-│  │  │Discord  │ │Cron      │ │  (port 18793)   │ │ │
+│  │  │Discord  │ │Cron      │ │  (port 19793)   │ │ │
 │  │  │Telegram │ │Heartbeat │ │  WebSocket +    │ │ │
 │  │  │Slack    │ │Webhooks  │ │  HTML serving   │ │ │
 │  │  │Signal   │ │          │ │                 │ │ │
@@ -125,7 +125,7 @@ claude-claw/
 │   │   │   ├── heartbeat.ts     # Heartbeat daemon
 │   │   │   └── webhooks.ts      # Webhook handler
 │   │   └── canvas/
-│   │       ├── server.ts        # Canvas WebSocket server (port 18793)
+│   │       ├── server.ts        # Canvas WebSocket server (port 19793)
 │   │       └── client.html      # Canvas browser client
 │   ├── package.json
 │   └── tsconfig.json
@@ -149,7 +149,7 @@ claude-claw/
 
 ### 1. Gateway Daemon
 
-Single Node.js process on `127.0.0.1:18789`. Manages all platform connections, session routing, scheduling, and Canvas.
+Single Node.js process on `127.0.0.1:19789`. Manages all platform connections, session routing, scheduling, and Canvas.
 
 **State directory:** `~/.claude-claw/`
 
@@ -229,7 +229,7 @@ Manages the lifecycle of `claude` CLI sessions:
 - Survives daemon restarts and reboots
 
 **Webhooks:**
-- HTTP endpoint: `http://localhost:18789/webhooks/:id`
+- HTTP endpoint: `http://localhost:19789/webhooks/:id`
 - External services trigger agent actions via POST
 - Configurable payload templates per webhook
 
@@ -237,7 +237,7 @@ Manages the lifecycle of `claude` CLI sessions:
 
 Agent-driven visual workspace (A2UI pattern from OpenClaw):
 
-- Separate server process on port `18793` (isolated from Gateway)
+- Separate server process on port `19793` (isolated from Gateway)
 - Serves HTML content via WebSocket to connected browser clients
 - Claude pushes HTML during any session via `claw-bridge` MCP tools
 - Real-time rendering in browser
@@ -298,13 +298,13 @@ The Gateway code itself is platform-universal. Only the daemon lifecycle scripts
 
 | OpenClaw Feature | claude-claw Equivalent | Status |
 |-----------------|----------------------|--------|
-| Gateway (port 18789) | Gateway daemon (port 18789) | v1 |
+| Gateway (port 19789) | Gateway daemon (port 19789) | v1 |
 | 15+ messaging platforms | Adapter system (Discord first) | v1 |
 | Skills (SKILL.md + ClawHub) | Claude Code skills system | v1 |
 | Heartbeat daemon | Heartbeat scheduler | v1 |
 | Cron jobs | Cron scheduler | v1 |
 | Webhooks | Webhook HTTP endpoints | v1 |
-| Canvas (A2UI, port 18793) | Canvas server (port 18793) | v1 |
+| Canvas (A2UI, port 19793) | Canvas server (port 19793) | v1 |
 | AGENTS.md / IDENTITY.md / SOUL.md / USER.md / MEMORY.md | Workspace config files | v1 |
 | Memory (daily + long-term + search) | Memory files + MCP tools | v1 |
 | Multi-agent routing | Single agent | v2 |
